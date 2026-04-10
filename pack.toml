@@ -1,13 +1,13 @@
 name = "WhiteOptimiz"
 author = "White_foggy"
-version = "18.2.0"
+version = "16.5.0"
 pack-format = "packwiz:1.1.0"
 
 [index]
 file = "index.toml"
 hash-format = "sha256"
-hash = "c4bd960f19b503c890c862885426142de0b6147e76efdcd2d9f1b58c58fbba00"
+hash = "532c9a7ee9a33c2ef07327b6370fab1d0fd7b92bf189cc19120b7ed43fb3d178"
 
 [versions]
 fabric = "0.19.1"
-minecraft = "1.18.2"
+minecraft = "1.16.5"
