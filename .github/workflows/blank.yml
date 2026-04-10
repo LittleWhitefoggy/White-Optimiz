@@ -53,7 +53,7 @@ jobs:
             exit 0
           fi
             
-          git commit -m "[skip ci] 刷新 index"
+          git commit -m "[skip ci] Refresh index"
           git push
 
       - name: Process Metadata
