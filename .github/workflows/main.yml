@@ -82,7 +82,6 @@ jobs:
         with:
           title: "WhiteOptimiz ${{ env.MC_VERSION }} ${{ env.LOADER }} 最新测试版"
           automatic_release_tag: "${{ env.MC_VERSION }}_${{ env.LOADER }}_latest_testing"
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-     #     repo_token: "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"          
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"       
           files: ./*.mrpack
           prerelease: true
