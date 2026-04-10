@@ -98,4 +98,6 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            ${{ secrets.ReleaseZipName }}.mrpack
+            ./*.mrpack
+
+
