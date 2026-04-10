@@ -1,0 +1,41 @@
+hash-format = "sha256"
+
+[[files]]
+file = "mods/entityculling.pw.toml"
+hash = "ec6d0bc25af0056fc407f8378a514d3c037561333b51699569e857d71bb24855"
+metafile = true
+
+[[files]]
+file = "mods/fabric-api.pw.toml"
+hash = "6b8bdb0032798b056e4850fc662382a58fcec305006db995596306f70fc5f145"
+metafile = true
+
+[[files]]
+file = "mods/ferrite-core.pw.toml"
+hash = "07f15bd07ec3c70f2196cb30c0cdcba681eb7afdc6489d0530826593d0dafb87"
+metafile = true
+
+[[files]]
+file = "mods/indium.pw.toml"
+hash = "d67eafbe55c4a3271cdc5d37b0c6dfe37f405accdd2b2a81691ee337116a829f"
+metafile = true
+
+[[files]]
+file = "mods/modmenu.pw.toml"
+hash = "df60e11c24d37f579ce2f3925a91c4c94d191099495d9f5bdc3c8fce0ac93a5a"
+metafile = true
+
+[[files]]
+file = "mods/sodium.pw.toml"
+hash = "0c83c344046d0b96fd7dcd9e5c98c44caa3d307126d502f202dba50855304fb9"
+metafile = true
+
+[[files]]
+file = "mods/xaeros-minimap.pw.toml"
+hash = "e0b6740cd58eb86fcefe8c4d98686431b874386fc77fca8f04f2f6abb0caca5a"
+metafile = true
+
+[[files]]
+file = "mods/xaeros-world-map.pw.toml"
+hash = "279d6561963358fa12ecbd2de1ef6f24a183160e13e9320dd51cd1ec2e1be432"
+metafile = true
