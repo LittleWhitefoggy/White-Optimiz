@@ -67,7 +67,7 @@ jobs:
 
       - name: Export Modrinth Pack
         run: |
-          cd overrides
+          cd ./
           packwiz modrinth export
           mv ./*.mrpack "WhiteOptimiz v${{ env.VERSION }}-${{ env.MC_VERSION }}-${{ env.LOADER }}+${{ env.SHORT_SHA }}.mrpack" 
 
