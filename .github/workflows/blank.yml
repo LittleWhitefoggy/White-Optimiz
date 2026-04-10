@@ -49,7 +49,7 @@ jobs:
         run: |
           git add pack.toml index.toml
           
-          if [ -z "$(git status --porcelain overrides/pack.toml overrides/index.toml)" ]; then
+          if [ -z "$(git status --porcelain pack.toml index.toml)" ]; then
             exit 0
           fi
             
