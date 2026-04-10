@@ -41,7 +41,7 @@ jobs:
 
       - name: Refresh index
         run: |
-          cd overrides
+          cd ./
           packwiz refresh
           
       - name: Commit changes
