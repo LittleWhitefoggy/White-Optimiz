@@ -24,10 +24,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          persist-credentials: true 
-          token: ${{ secrets.REFRESH_INDEX }} 
-          fetch-depth: 0
 
       - name: Setup Git config
         run: |
