@@ -1,0 +1,91 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Export WhiteOptimiz
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "1.18.2" branch
+  push:
+    branches: [ "1.18.2" ]
+  pull_request:
+    branches: [ "1.18.2" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true 
+          token: ${{ secrets.REFRESH_INDEX }} 
+          fetch-depth: 0
+
+      - name: Setup Git config
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.23.3"
+          cache: false
+
+      - name: Install Packwiz
+        run: go install github.com/packwiz/packwiz@latest
+
+      - name: Refresh index
+        run: |
+          cd overrides
+          packwiz refresh
+          
+      - name: Commit changes
+        id: commit-check
+        run: |
+          git add pack.toml index.toml
+          
+          if [ -z "$(git status --porcelain overrides/pack.toml overrides/index.toml)" ]; then
+            exit 0
+          fi
+            
+          git commit -m "[skip ci] 刷新 index"
+          git push
+
+      - name: Process Metadata
+        run: |
+          SHORT_SHA=${GITHUB_SHA::7}
+          echo "VERSION=18.2" >> $GITHUB_ENV  
+          echo "MC_VERSION=1.18.2" >> $GITHUB_ENV
+          echo "LOADER=Fabric" >> $GITHUB_ENV
+          echo "SHORT_SHA=$SHORT_SHA" >> $GITHUB_ENV
+          sed -i "s/commitid/$SHORT_SHA/g" ./pack.toml
+
+      - name: Export Modrinth Pack
+        run: |
+          cd overrides
+          packwiz modrinth export
+          mv ./*.mrpack "WhiteOptimiz v${{ env.VERSION }}-${{ env.MC_VERSION }}-${{ env.LOADER }}+${{ env.SHORT_SHA }}.mrpack" 
+
+      - name: Upload WhiteOptimiz to Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: WhiteOptimiz v${{ env.VERSION }}-${{ env.MC_VERSION }}-${{ env.LOADER }}+${{ env.SHORT_SHA }}
+          path: ./*.mrpack
+
+      - name: Upload WhiteOptimiz to Releases
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          title: "WhiteOptimiz ${{ env.MC_VERSION }} ${{ env.LOADER }} Testing Latest"
+          automatic_release_tag: "${{ env.MC_VERSION }}_${{ env.LOADER }}_latest_testing"
+          repo_token: "${{ secrets.UPLOAD_TO_RELEASES }}"
+          files: ./overrides/*.mrpack
+          prerelease: true
