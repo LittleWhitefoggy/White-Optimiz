@@ -88,12 +88,13 @@ jobs:
     #      prerelease: true
 
       - name: Create Release and Upload Release Asset
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        if: github.ref_type == 'tag'
         with:
           tag_name: ${{ env.MC_VERSION }}_${{ env.LOADER }}_latest_testing
           name: WhiteOptimiz ${{ env.MC_VERSION }} ${{ env.LOADER }} 最新测试版
           body: 新发布。
+          token: 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
           draft: false
           prerelease: false
           files: |
